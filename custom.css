@@ -1,3 +1,14 @@
 .form-group {padding: 0% 20%}
 
 #submit-btn {margin: 1em 0rem}
+
+#textarea-label {
+    font-size: medium;
+}
+
+#text-box {
+    background-color: #b8e2b8;
+    color: black;
+    vertical-align: top;
+  }
+
