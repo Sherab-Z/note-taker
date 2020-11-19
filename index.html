@@ -4,37 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap.min.css">  
     <link rel="stylesheet" href="custom.css">
     <title>Note Taker</title>
 </head>
 <body>
     <h1 class="text-center">Note Taker</h1>
     <form action="index.js">
-        <div class="form-group container">
+        <div id="form" class="form-group container">
             <div class="row w-50 mx-auto">
                 <legend class="text-success text-center">Add A New Note:</legend>
             </div>
             <div class="row mx-2">
-                <label for="text-box" class="mr-sm-2" id="textarea-label">Note:</label>
-                <textarea class="form-control" rows="2" id="text-box" placeholder="Write your note here"></textarea>
+                <label id="textarea-label" for="text-box" class="mr-sm-2">Note:</label>
+                <textarea id="text-box" class="form-control" rows="2" placeholder="Write your note here"></textarea>
             </div>
-            <div class="row text-center ">
-                <button type="submit" class="btn btn-success" id="submit-btn">Add Note</button>
+            <div class="row text-center">
+                <button id="submit-btn" type="submit" class="btn btn-success">Add Note</button>
             </div>
         </div> <!-- close form-group -->
-    
-    <div class="container" id="notes-table">
-        <div class="container note">
-            <h4>Note</h4>
-            <p></p>
-            <button type="submit" class="btn btn-primary">View Detail</button>
+    </form>
+    <div id="notes-table" class="container row">
+        <div id="left-column" class="column">
+            <div class="card">
+                <h4>Note</h4>
+                <p>Hello, this is my note.</p>
+                <button type="submit" class="detail-btn btn btn-primary">View Detail</button>
+            </div>
+            
         </div>
-        <div id="modal-temp" class="modal">
+        <div id="right-column" class="column">
 
         </div>
 
-    </div>
+        
+
+    </div> <!-- close notes-table -->
     <script src="index.js"></script>
 </body>
 </html>
