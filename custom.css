@@ -1,30 +1,28 @@
 body {
-    width: 1250px;
     margin: 0px auto;
 }
 
+h1 {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 4em;
+    font-weight: normal;
+}
+
+form {
+    width: 75%;
+    margin: auto;
+    position: relative;
+}
+
+legend {
+    border: none;
+    text-align: center;
+    font-weight: 500;
+}
+
 .form-group {
-    padding: 0% 15%;
-}
-
-#submit-btn {
-    margin: 1em 0rem;
-}
-
-#textarea-label {
-    font-size: medium;
-}
-
-#text-box {
-    background-color: #e9f8e9;
-    color: black;
-    vertical-align: top;
-}
-
-#notes-table {
-    width: 85%;
-    margin: 0px auto 0px auto;
-    column-count: 2;
+    
 }
 
 .column {
@@ -33,7 +31,56 @@ body {
 }
 
 .card {
-    border: 3px;
-    border-color: gray;
+    border: 1px solid #80808033;
     border-radius: 5px;
+    padding: 10px 10px 20px 10px;
+}
+
+#btn-div {
+    margin-top: 1em;
+    position: absolute;
+}
+
+#textbox-div {
+    position: relative;
+    width: 80%;
+    margin: auto;
+}
+
+#textbox-label {
+    position: absolute;
+    float: left;
+    font-size: medium;
+    width: 5%;
+    min-width: 58.496px;
+}
+
+#text-box {
+    position: absolute;
+    float: right;
+    width: 95%;
+    background-color: #e9f8e9;
+    color: black;
+    vertical-align: top;
+}
+
+#notes-table {
+    position: relative;
+    width: 1100px;
+    margin: 0px auto 0px auto;
+    column-count: 2;
+}
+
+#left-column {
+    position: absolute;
+    float: left;
+    left: 0;
+    width: 47.5%;
+}
+
+#right-column {
+    position: absolute;
+    float: right;
+    right: 0;
+    width: 47.5%;
 }
