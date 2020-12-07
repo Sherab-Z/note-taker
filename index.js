@@ -1,89 +1,37 @@
-/*let submitNoteStr = {
-    clearTextbox        : function() {
-
-    },
-} */
-
-document.getElementById("submit-btn").onclick=function(){
-    newNoteObj.addNoteDiv();
+document.getElementById("submit-btn").onclick = function() {
+    newNoteObj.validateNote();
 } 
 
 let newNoteObj = {
 // NOTE: this can be organised into sub-objects on 2nd coding iteration
-
-    noteCounter         : 0,
-    title               : "Note " + noteCounter,
     noteStr             : document.getElementById("textbox"),
-    floatToSide         : "",
-    divClass            : "class='note-card", // Remove this?
+    noteCounter         : 0,
+    newNote             : "",
     
-    addNoteDiv         : function() {
-
-        let noteDivTag = document.createElement("div");
-        noteDivTag.className = "note-card " + floatToSide + "-note";
-        
-        noteDivTag.innerHTML = "<h2>It worked!</h2>"
-
-        let noteSpace = document.getElementById("bottom-section-div");
-        noteSpace.appendChild(noteDivTag);
-
-        return noteDivTag;    
-/* Returning noteDivTag variable so as to grab it later more easily when filling 
-that div with the other tags. 
-*/
+    validateNote        : function(noteStr) {
+// checks for text string. If empty, alerts user; if ok, calls createNewNote()
+        if(noteStr === "") {
+            alert("Please write a note");
+        } else {
+            newNoteObj.createNewNote();
+        }
+        console.log("validateNote() has been called")
     },
 
-    prepNoteTitle       : function(title) {
-    //adds a title to the new note with the note number
-        let titleTag = document.createElement("h4");
-        titleTag.classnoteDivTag.className = "note-title";
-        let node = titleTag.createTextNode(title);
-        titleTag.appendChild(node);
+    addNoteDiv          : function() { 
+// adds div container, with class="note-card", to bottom-section-div
 
-        return titleTag;
+        noteDiv = document.createElement("div");
+        noteDiv.className = "note-card ";
+
+        newNote = noteDiv;
+
+        console.log("addNoteDiv() has been called")
+        return newNote;
     },
 
-    prepNoteContent     : function(noteStr) {
-    //
-        let contentTag = document.createElement("p");
-        contentTag.classnoteDivTag.className = "note-content";
-        let node = contentTag.createTextNode(noteStr);
-        contentTag.appendChild(node);
-
-        return contentTag;
-    },
-
-    prepViewBtn         : function() {
-
-        let viewBtnTag = document.createElement("button");
-        viewBtnTag.type = "submit";
-        viewBtnTag.classnoteDivTag.className = "view-btn btn btn-info";
-        let node = viewBtnTag.createTextNode("View Detail");
-        viewBtnTag.appendChild(node);
-
-        return viewBtnTag;
-    },
-
-    prepDeleteBtn       : function() {
-
-        let deleteBtnTag = document.createElement("button");
-        deleteBtnTag.type = "submit";
-        deleteBtnTag.classnoteDivTag.className = "del-btn btn btn-danger btn-sm";
-        let node = deleteBtnTag.createTextNode("x");
-        deleteBtnTag.appendChild(node);
-
-        return deleteBtnTag;
-    },
-
-    addNoteToPage       : function(noteDivTag, titleTag, contentTag, viewBtnTag, deleteBtnTag) {
-
-        noteDivTag.appendChild(titleTag);
-        noteDivTag.appendChild(contentTag);
-        noteDivTag.appendChild(viewBtnTag);
-        noteDivTag.appendChild(deleteBtnTag);
-    },
-    
-    floatToShortCol        : function() {
+    floatToShortCol        : function(newNote) {
+// compares column lengths; floats new note to shortest col, or floats left if cols are equal
 
         let sideCounter = 0;
         let positionArr = Array.from(document.getElementsByClassName("note-card"));
@@ -91,8 +39,8 @@ that div with the other tags.
         
         for(noteClass in positionArr) {
 
-            let side = this.classnoteDivTag.className;
-
+            let side = noteClass.className;
+// -- & ++ sideCounter
             if (side === "note-card left-note") {
                 sideCounter --;
             } else if (side === "note-card right-note") {
@@ -102,14 +50,93 @@ that div with the other tags.
             } ADD THIS IF THERE'S TIME */
 
             if(sideCounter <= 0) {
-                this.className = "note-card left-note"
+                newNote.className = "note-card left-note"
             } else if (sideCounter > 0) {
-                this.className = "note-card right-note"
+                newNote.className = "note-card right-note"
             }
         }
+
+        console.log("floatToShortCol() has been called")
+        return newNote;
+    },
+
+    addNoteTitle       : function(noteCounter, newNote) {
+// adds a title to the new note with the note number
+
+        let titleTag = document.createElement("h4");
+        titleTag.className = "note-title";
+        let node = titleTag.createTextNode("Note " + noteCounter);
+        titleTag.appendChild(node);
+
+        newNote.appendChild(node);
+
+        console.log("addNoteTitle() has been called")
+        return newNote;
+    },
+
+    addNoteText     : function(noteStr, newNote) {
+// gets text-string from textbox, creates <p> tag with class="note-text", & appends string to <p> tag
+
+        let contentTag = document.createElement("p");
+        contentTag.className = "note-text";
+        let node = contentTag.createTextNode(noteStr);
+        contentTag.appendChild(node);
+        newNote.appendChild(contentTag)
+
+        return newNote;
+    },
+
+    addViewBtn         : function(newNote) {
+//adds 'View Detail' button to new note, which opens full note in a modal with a 'close' button
+
+        let viewBtnTag = document.createElement("button");
+        viewBtnTag.type = "submit";
+        viewBtnTag.className = "view-btn btn btn-info";
+        let node = viewBtnTag.createTextNode("View Detail");
+        viewBtnTag.appendChild(node);
+
+        newNote.appendChild(viewBtnTag);
+
+        return newNote;
+    },
+
+    addDeleteBtn       : function(newNote) {
+// adds a delete button to new note, with bootstrap styling via classes
+
+        let deleteBtnTag = document.createElement("button");
+        deleteBtnTag.type = "submit";
+        deleteBtnTag.className = "del-btn btn btn-light btn-sm";
+        let node = deleteBtnTag.createTextNode("x");
+        deleteBtnTag.appendChild(node);
+
+        newNote.appendChild(deleteBtnTag);
+
+        return newNote;
+    },
+
+    createNewNote       : function(newNote) {
+// calls all relevant functions above to create new note to bottom of the page
+
+        newNoteObj.addNoteDiv();
+        newNoteObj.floatToShortCol();
+        newNoteObj.addNoteTitle();
+        newNoteObj.addNoteText();
+        newNoteObj.addViewBtn();
+        newNoteObj.addDeleteBtn();
+
+        return newNote;
     },
    
-    viewDetail          : function() {
+    putNewNoteinPage    : function(newNote) {
+
+        let noteSpace = document.getElementById("bottom-section-div");
+        let node = noteSpace.createTextNode(newNote);
+        notespace.appendChild(node);
+
+        console.log("SUCCESS! Note added to page!");
+    },
+
+ /*   viewDetail          : function() {
 
     },
     closeDetail         : function() {
@@ -117,14 +144,11 @@ that div with the other tags.
     },
     deleteNote          : function() {
 
-    },
+    }, */
 
 } 
 
-let putNoteInTable = {
-
-}
-
+/*
 let viewBtn = {
 
     viewBtnType         : "type=\"submit\"",
@@ -136,9 +160,4 @@ let viewBtn = {
     closeModal          : function() {
 
     },
-}
-
-let delBtn = {
-    deBtnT
-
-}
+} */
