@@ -2,45 +2,83 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" contents="device-width" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="bootstrap.min.css">  
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200;400&display=swap" rel="stylesheet">    
+   <link rel="stylesheet" href="bootstrap.min.css">  
     <link rel="stylesheet" href="custom.css">
     <title>Note Taker</title>
 </head>
 <body>
-    <div id="top-section-div">
-        <h1 class="text-center">Note Taker</h1>
-        <form action="index.js">
-            <div class="row w-50 mx-auto">
-                <legend class="text-success text-center">Add A New Note:</legend>
+    <div id="page-container"> <!-- for center-aligning the whole page -->
+        <div id="top-section-div">
+            <h1>Note Taker</h1>
+
+            <div id="form">
+                <div id="legend-div">
+                    <legend class="text-success">
+                        Add A New Note:
+                    </legend>
+                </div> <!-- ends legend-div -->
+
+                <div id="textbox-div">
+                    <label id="textbox-label" for="text-box">
+                        Note:
+                    </label>
+                    <textarea id="textbox" class="form-control" rows="2" placeholder="Write your note here">
+                    </textarea>
+                </div> <!-- ends textbox-div -->
+
+                <div id="add-btn-div">
+                    <button id="submit-btn" type="submit" class="btn btn-success btn-lg" onclick="newNoteObj.addNoteDiv()">
+                        Add Note
+                    </button> 
+                </div> <!-- ends btn-div -->
             </div>
-            <div id="textbox-div" class="row mx-2">
-                <label id="textbox-label" for="text-box" class="column mr-sm-2">Note:</label>
-                <textarea id="text-box" class="column form-control" rows="2" placeholder="Write your note here"></textarea>
-            </div>
-            <div id="btn-div" class="row text-center">
-                <button id="submit-btn" type="submit" class="btn btn-success btn-lg">Add Note</button>
-            </div>
-        </form>
-    </div> <!-- close top-section-div -->
-    
-    <div id="notes-table" class="container row">
-        <div id="left-column" class="column">
-            <div class="card">
-                <h4>Note</h4>
-                <p>Hello, this is my note.</p>
-                <button type="submit" class="detail-btn btn btn-primary">View Detail</button>
+        </div> <!-- ends top-section-div -->
+        
+        <div id="bottom-section-div">
+            <div class="note-card left-note">
+                <h4>Left Note</h4>
+                <p>Hello, this is my note. Displays an element as an 
+                    inline-level block Displays an element as an 
+                    inline-level block container. The element itself is 
+                    formatted as an inline element, but you can 
+                    apply height and width values</p>
+                <button type="submit" class="detail-btn btn btn-info">
+                    View detail
+                </button>
             </div>
             
-        </div>
-        <div id="right-column" class="column">
+            <div class="note-card right-note">
+                <h4>Right Note</h4>
 
-        </div>
+                <p>Hello, this is my note. </p>
 
-        
+                <button type="submit" class="detail-btn btn btn-info">
+                    View Detail
+                </button>
+            </div>
 
-    </div> <!-- close notes-table -->
+            <div class="note-card right-note">
+                <h4 class="note-title">Right Note</h4>
+                <p class="note-content">Hello, this is my note. Displays an element as an 
+                    inline-level block container. The element itself is 
+                    formatted as an inline element, but you can 
+                    apply height and width values</p>
+                <button type="submit" 
+                class="view-btn btn btn-info">
+                    View Detail
+                </button>
+                <button type="submit" class="del-btn btn btn-light btn-sm">
+                    x
+                </button>
+            </div>
+            
+        </div> <!-- ends bottom-section-div -->
+    </div> <!-- ends page-container -->
+    
     <script src="index.js"></script>
 </body>
 </html>
