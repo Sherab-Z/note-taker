@@ -3,15 +3,16 @@ Layman's Plan:
 0. Initailise variables:
     a. noteCounter = 0
     b. noteStr = ""
-    c. sideCounter = 0
 
 1. User adds note-string and presses 'Add Note'
 
-2. JS gets User's note-string from text-box, assigns it to noteStr variable
+2. JS gets & verifies User's note-string from text-box
+    - if contains a string: itassigns it to noteStr variable
+    - if empty string: alerts "Please write your note"
 
 3. Create & add new note:
     a. increment noteCounter
-    b. make container: create & add <div> tag with class="note-card"
+    b. make container: create & add <div> tag with class="note-card" and temporary id="new-note"
     c. add title: create <h4>, append "Note " + value of noteCounter
     d. add noteStr: create <p>, append noteStr
     e. add 'View Detail' button:
@@ -20,11 +21,12 @@ Layman's Plan:
     f. add 'x' button:
         i. removeNote(): deletes note from browser's html
     g. add note to shortest column
-        i. compare column lengths
-            1. leftArr = array of notes with class="left-note"
-            2. make array of notes with class="right-note"
-            3. compare array lengths to find the shortest
-        ii. append corresponding class to new note div's class attribute
+        i. compare column lengths & assign note to shortest column
+            1. let sideCounter = 0
+            1. iterate through notes, increment sideCounter for each right-note, decrement for each left-note
+            3.  - if sideCounter <= 0: append "left-note" to div class (note goes to left  side if cols are equal)
+                - else if sideCounter > 0: append "right-note" to div class
+    h. remove id="new-note"
 
 4. When 'View Detail' is clicked on a note, modal pops up:
     - displays entire note text
