@@ -1,13 +1,15 @@
 
 let newNoteObj = {
-// this contains all the properties & methods needed for the app to function
+/* this contains all the properties & methods needed for the app to function. Each successive method updates newNoteTags property's value, 
+   until putNewNoteTagsIntoNewNoteDiv() passes it, completed, over to html */
+
 // NOTE: this obj can be organised into sub-objects on 2nd coding iteration
 
 /// PROPERTIES:
 
-    noteTextStr         : document.getElementById("textbox").value,
+    noteTextStr         : "",
     noteCounter         : 0,
-    newNote             : "",
+    newNoteTags         : "test string",
 
 /// METHODS:
 
@@ -17,37 +19,44 @@ let newNoteObj = {
             alert("Please write a note");
         } else {
             this.createNewNote();
+
+            console.log("validateNote() has been called. noteTextStr: '" + this.noteTextStr + "' ; Note Counter: " 
+            + this.noteCounter);
         }
-        console.log("validateNote() has been called")
     },
 
     createNewNote() {
 // calls all relevant functions below to create & append new note to bottom of the page
         
-                this.addNoteDiv();
+                this.addNoteDivToPage();
                 this.floatToShortCol();
                 this.addNoteTitle();
                 this.addNoteText();
                 this.addViewBtn();
                 this.addDeleteBtn();
         
-                this.putNewNoteinPage(this.newNote);
+                this.putNewNoteTagsIntoNewNoteDiv();
+
+                console.log("createNewNote() has been called. newNote: " + this.newNoteTags.value);
     },
            
-    addNoteDiv() { 
+    addNoteDivToPage() { 
 // adds div container, with class="note-card", to bottom-section-div
 
         noteDiv = document.createElement("div");
         noteDiv.className = "note-card ";
+        noteDiv.id = "new-note"; // this is a temporary id for locating this div while building it out. It'll be removed once the note is complete
 
-        this.newNote = noteDiv;
+        let noteSpace = document.getElementById("bottom-section-div");
+        noteSpace.appendChild(noteDiv);
 
-        console.log("addNoteDiv() has been called")
+        console.log("addNoteDiv() has been called. noteDiv: " + noteDiv.outerHTML);
     },
 
     floatToShortCol() {
 // compares column lengths; floats new note to shortest col, or floats left if cols are equal
 
+        let newNote = document.getElementById("new-note");
         let sideCounter = 0;
         let positionArr = Array.from(document.getElementsByClassName("note-card"));
         let note;
@@ -65,13 +74,14 @@ let newNoteObj = {
             } ADD THIS IF THERE'S TIME */
 
             if(sideCounter <= 0) {
-                this.newNote.className = "note-card left-note"
+                newNote.className = "note-card left-note"
             } else if (sideCounter > 0) {
-                this.newNote.className = "note-card right-note"
+                newNote.className = "note-card right-note"
             }
         }
 
-        console.log("floatToShortCol() has been called")
+        console.log("floatToShortCol() has been called. newNote: " + this.newNoteTags.value);
+        return newNoteTags;
     },
 
     addNoteTitle() {
@@ -82,9 +92,10 @@ let newNoteObj = {
         let node = document.createTextNode("Note " + this.noteCounter);
         titleTag.appendChild(node);
 
-        this.newNote.appendChild(titleTag);
+        this.newNoteTags.push(titleTag);
 
-        console.log("addNoteTitle() has been called")
+        console.log("addNoteTitle() has been called. newNote: " + this.newNoteTags.value);
+        return newNoteTags;
     },
 
     addNoteText() {
@@ -94,7 +105,10 @@ let newNoteObj = {
         contentTag.className = "note-text";
         let node = document.createTextNode(this.noteTextStr);
         contentTag.appendChild(node);
-        this.newNote.appendChild(contentTag)
+        this.newNoteTags.push(contentTag)
+
+        console.log("addNoteText() has been called. newNote: " + this.newNoteTags.value);
+        return newNoteTags;
     },
 
     addViewBtn() {
@@ -106,7 +120,10 @@ let newNoteObj = {
         let node = document.createTextNode("View Detail");
         viewBtnTag.appendChild(node);
 
-        this.newNote.appendChild(viewBtnTag);
+        this.newNoteTags.push(viewBtnTag);
+
+        console.log("addViewBtn() has been called. newNote: " + this.newNoteTags.value);
+        return newNoteTags;
     },
 
     addDeleteBtn() {
@@ -118,17 +135,22 @@ let newNoteObj = {
         let node = document.createTextNode("x");
         deleteBtnTag.appendChild(node);
 
-        this.newNote.appendChild(deleteBtnTag);
+        this.newNoteTags.push(deleteBtnTag);
+
+        console.log("addDeleteBtn() has been called. newNote: " + this.newNoteTags.value);
+        return newNoteTags;
     },
 
-    putNewNoteinPage() {
+    putNewNoteTagsIntoNewNoteDiv() {
 
-        let noteSpace = document.getElementById("bottom-section-div");
-        let node = document.createTextNode(this.newNote);
-        noteSpace.appendChild(node);
+        let newNote = document.getElementById("new-note");
+        let node = this.newNoteTags;
+        newNote.appendChild(node);
 
         console.log("SUCCESS! Note added to page!");
-    },
+
+        document.getElementById("new-note").id.remove();
+    }
 
  /*   viewDetail          : function() {
 
@@ -159,6 +181,7 @@ let viewBtn = {
 /// EVENT HANDLERS:
 
 document.getElementById("submit-btn").onclick = function() {
-    
+
+    newNoteObj.noteTextStr = document.getElementById("textbox").value;
     newNoteObj.validateNote();
 } 
